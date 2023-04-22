@@ -9,11 +9,13 @@ import { Olympic } from 'src/app/core/models/Olympic';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public olympics$: Observable<Olympic[] | null> = of([]);
+  public olympics$: Observable<Olympic[] | undefined> = of(undefined);
+  public listOfCountries$: Observable<String[] | undefined> = of(undefined);
 
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
+    this.listOfCountries$ = this.olympicService.getListOfCountries();
   }
 }

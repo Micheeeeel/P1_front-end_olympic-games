@@ -4,13 +4,14 @@ import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
 import { __values } from 'tslib';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<Olympic[] | null>([]);
+  private olympics$ = new BehaviorSubject<Olympic[] | undefined>(undefined);
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +22,7 @@ export class OlympicService {
         // TODO: improve error handling
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong
-        this.olympics$.next(null);
+        this.olympics$.next(undefined);
         return caught;
       })
     );
@@ -29,5 +30,14 @@ export class OlympicService {
 
   getOlympics() {
     return this.olympics$.asObservable();
+  }
+
+  getListOfCountries() {
+    return this.olympics$.asObservable().pipe(
+      map((value) => {
+        const countries = value?.map((olympic) => olympic.country);
+        return countries;
+      })
+    );
   }
 }
