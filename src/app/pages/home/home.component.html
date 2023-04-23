@@ -6,3 +6,8 @@
   *ngFor="let thisCountry of olympics$ | async"
   [olympic]="thisCountry"
 ></app-country>
+<ul>
+  <li *ngFor="let medalsperCountry of nbMedalsPerCountry$ | async">
+    {{ medalsperCountry.country }}: {{ medalsperCountry.totalMedals }} medals
+  </li>
+</ul>

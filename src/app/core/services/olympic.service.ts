@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<Olympic[] | undefined>(undefined);
+  private olympics$ = new BehaviorSubject<Olympic[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class OlympicService {
         // TODO: improve error handling
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong
-        this.olympics$.next(undefined);
+        this.olympics$.next([]);
         return caught;
       })
     );
@@ -46,17 +46,58 @@ export class OlympicService {
   getMedalsPerYear(
     country: String
   ): Observable<{ year: number; medalsCount: number }[]> {
-    return this.olympics$.asObservable().pipe(
-      map((olympics) => {
-        const olympic = olympics?.find((o) => o.country === country);
-        if (olympic) {
-          return olympic.participations.map((participation) => ({
-            year: participation.year,
-            medalsCount: participation.medalsCount,
-          }));
-        }
-        return [];
-      })
+    return this.olympics$
+      .asObservable()
+      .pipe(
+        map((olympics) =>
+          this.mapOlympicsToMedalsPerYear(
+            olympics?.find((o) => o.country === country)
+          )
+        )
+      );
+  }
+
+  private mapOlympicsToMedalsPerYear(
+    olympic: Olympic | undefined
+  ): { year: number; medalsCount: number }[] {
+    if (!olympic) {
+      return [];
+    }
+
+    return olympic.participations.map((participation) => ({
+      year: participation.year,
+      medalsCount: participation.medalsCount,
+    }));
+  }
+
+  getTotalMedalsPerCountry(): Observable<
+    { country: string; totalMedals: number }[]
+  > {
+    return this.olympics$
+      .asObservable()
+      .pipe(map((olympics) => this.mapOlympicsToTotalMedals(olympics)));
+  }
+
+  private mapOlympicsToTotalMedals(
+    olympics: Olympic[] | undefined
+  ): { country: string; totalMedals: number }[] {
+    if (!olympics) {
+      return [];
+    }
+
+    return olympics.map((olympic: Olympic) => {
+      const totalMedals = this.getTotalMedalsForCountry(olympic);
+      return {
+        country: olympic.country,
+        totalMedals,
+      };
+    });
+  }
+
+  private getTotalMedalsForCountry(olympic: Olympic): number {
+    return olympic.participations.reduce(
+      (sum, participation) => sum + participation.medalsCount,
+      0
     );
   }
 }
