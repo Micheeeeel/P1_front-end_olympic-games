@@ -39,9 +39,9 @@ export class PieChartComponent implements OnInit {
     Object.assign(this, { dataList: this.dataList });
   }
 
-  // onSelect(data): void {
-  //   console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  // }
+  onSelect(data: { name: string; value: number }): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
 
   // onActivate(data): void {
   //   console.log('Activate', JSON.parse(JSON.stringify(data)));
