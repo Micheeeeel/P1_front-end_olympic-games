@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
+import { Participation } from '../models/Participation';
 import { __values } from 'tslib';
 import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +39,23 @@ export class OlympicService {
       map((value) => {
         const countries = value?.map((olympic) => olympic.country);
         return countries;
+      })
+    );
+  }
+
+  getMedalsPerYear(
+    country: String
+  ): Observable<{ year: number; medalsCount: number }[]> {
+    return this.olympics$.asObservable().pipe(
+      map((olympics) => {
+        const olympic = olympics?.find((o) => o.country === country);
+        if (olympic) {
+          return olympic.participations.map((participation) => ({
+            year: participation.year,
+            medalsCount: participation.medalsCount,
+          }));
+        }
+        return [];
       })
     );
   }
