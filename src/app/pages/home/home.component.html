@@ -4,5 +4,5 @@
 <p>list of countries :{{ (listOfCountries$ | async)?.length }}</p>
 <app-country
   *ngFor="let thisCountry of olympics$ | async"
-  [country]="thisCountry"
+  [olympic]="thisCountry"
 ></app-country>

@@ -1,10 +1,10 @@
 <div class="country">
-  <h2>{{ country.country }}</h2>
-  <p>ID: {{ country.id }}</p>
+  <h2>{{ olympic.country }}</h2>
+  <p>ID: {{ olympic.id }}</p>
   <div class="participations">
     <h3>Participations :</h3>
     <ul>
-      <li *ngFor="let participation of country.participations">
+      <li *ngFor="let participation of olympic.participations">
         Année: {{ participation.year }}, Ville: {{ participation.city }},
         Médailles: {{ participation.medalsCount }}, Athlètes:
         {{ participation.athleteCount }}

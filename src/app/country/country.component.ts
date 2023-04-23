@@ -9,7 +9,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./country.component.scss'],
 })
 export class CountryComponent implements OnInit {
-  @Input() country!: Olympic;
+  @Input() olympic!: Olympic;
 
   nbMedalsPerYear$: Observable<{ year: number; medalsCount: number }[]> = of(
     []
@@ -18,9 +18,9 @@ export class CountryComponent implements OnInit {
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    if (this.country && this.country.country) {
+    if (this.olympic && this.olympic.country) {
       this.nbMedalsPerYear$ = this.olympicService.getMedalsPerYear(
-        this.country.country
+        this.olympic.country
       );
     }
   }
