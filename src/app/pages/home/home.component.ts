@@ -11,8 +11,7 @@ import { Olympic } from 'src/app/core/models/Olympic';
 export class HomeComponent implements OnInit {
   olympics$: Observable<Olympic[]> = of([]);
   listOfCountries$: Observable<string[]> = of([]);
-  nbMedalsPerCountry$: Observable<{ country: string; totalMedals: number }[]> =
-    of([]);
+  nbMedalsPerCountry$: Observable<{ name: string; value: number }[]> = of([]);
 
   constructor(private olympicService: OlympicService) {}
 

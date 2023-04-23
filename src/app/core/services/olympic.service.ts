@@ -70,9 +70,7 @@ export class OlympicService {
     }));
   }
 
-  getTotalMedalsPerCountry(): Observable<
-    { country: string; totalMedals: number }[]
-  > {
+  getTotalMedalsPerCountry(): Observable<{ name: string; value: number }[]> {
     return this.olympics$
       .asObservable()
       .pipe(map((olympics) => this.mapOlympicsToTotalMedals(olympics)));
@@ -80,7 +78,7 @@ export class OlympicService {
 
   private mapOlympicsToTotalMedals(
     olympics: Olympic[] | undefined
-  ): { country: string; totalMedals: number }[] {
+  ): { name: string; value: number }[] {
     if (!olympics) {
       return [];
     }
@@ -88,8 +86,8 @@ export class OlympicService {
     return olympics.map((olympic: Olympic) => {
       const totalMedals = this.getTotalMedalsForCountry(olympic);
       return {
-        country: olympic.country,
-        totalMedals,
+        name: olympic.country,
+        value: totalMedals,
       };
     });
   }

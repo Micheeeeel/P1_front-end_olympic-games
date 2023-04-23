@@ -9,6 +9,7 @@ import { CountryComponent } from './country/country.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ParticipationComponent } from './participation/participation/participation.component';
+import { PieChartComponent } from './pages/home/graph/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ParticipationComponent } from './participation/participation/participat
     NotFoundComponent,
     CountryComponent,
     ParticipationComponent,
+    PieChartComponent,
   ],
   imports: [
     NgxChartsModule,
