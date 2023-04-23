@@ -8,6 +8,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CountryComponent } from './country/country.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ParticipationComponent } from './participation/participation/participation.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     NotFoundComponent,
     CountryComponent,
+    ParticipationComponent,
   ],
   imports: [
     NgxChartsModule,
