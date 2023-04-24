@@ -12,7 +12,12 @@
         [labels]="labels"
         [doughnut]="doughnut"
         (select)="onSelect($event)"
-      ></ngx-charts-pie-chart>
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          {{ model.name }} <br />
+          🏅 {{ model.value }}
+        </ng-template>
+      </ngx-charts-pie-chart>
     </td>
   </tr>
 </table>
