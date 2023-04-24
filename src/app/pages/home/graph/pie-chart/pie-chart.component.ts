@@ -9,22 +9,22 @@ import { LegendPosition, Color, ScaleType } from '@swimlane/ngx-charts';
 export class PieChartComponent implements OnInit {
   @Input() dataList: { name: string; value: number }[] = [];
 
-  view: [number, number] = [700, 400];
-  colorScheme: Color = {
-    name: 'custom',
-    selectable: true,
-    group: ScaleType.Linear,
-    domain: [
-      '#5AA454',
-      '#A10A28',
-      '#C7B42C',
-      '#AAAAAA',
-      '#8c6d31',
-      '#e8175d',
-      '#474747',
-      '#9c27b0',
-    ],
-  };
+  view: [number, number] = [500, 500];
+  // colorScheme: Color = {
+  //   name: 'custom',
+  //   selectable: true,
+  //   group: ScaleType.Linear,
+  //   domain: [
+  //     '#5AA454',
+  //     '#A10A28',
+  //     '#C7B42C',
+  //     '#AAAAAA',
+  //     '#8c6d31',
+  //     '#e8175d',
+  //     '#474747',
+  //     '#9c27b0',
+  //   ],
+  // };
   gradient: boolean = true;
   legend: boolean = false;
   // legendPosition: LegendPosition = LegendPosition.Below;
