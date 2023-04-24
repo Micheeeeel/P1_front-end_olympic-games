@@ -10,13 +10,13 @@
     <div class="col-6">
       <div class="mySubTitle d-inline-block mx-auto px-2 rounded">
         <h6 class="text-secondary py-1">Number of JOs</h6>
-        <h4 class="text-dark">12</h4>
+        <h4 class="text-dark">{{ nBJOs }}</h4>
       </div>
     </div>
     <div class="col-6">
       <div class="mySubTitle d-inline-block mx-auto px-2 rounded">
         <h6 class="text-secondary py-1">Number of countries</h6>
-        <h4 class="text-dark">5</h4>
+        <h4 class="text-dark">{{ (listOfCountries$ | async)?.length }}</h4>
       </div>
     </div>
   </div>

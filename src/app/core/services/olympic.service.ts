@@ -44,14 +44,14 @@ export class OlympicService {
   }
 
   getMedalsPerYear(
-    country: String
+    countryName: String
   ): Observable<{ year: number; medalsCount: number }[]> {
     return this.olympics$
       .asObservable()
       .pipe(
         map((olympics) =>
           this.mapOlympicsToMedalsPerYear(
-            olympics?.find((o) => o.country === country)
+            olympics?.find((o) => o.country === countryName)
           )
         )
       );
