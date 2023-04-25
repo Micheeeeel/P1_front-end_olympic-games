@@ -53,7 +53,7 @@ export class OlympicService {
 
   getMedalsPerYear(
     countryName: String
-  ): Observable<{ name: number; value: number }[]> {
+  ): Observable<{ name: string; value: number }[]> {
     return this.olympics$
       .asObservable()
       .pipe(
@@ -67,7 +67,7 @@ export class OlympicService {
 
   private mapOlympicsToMedalsPerYear(
     olympic: Olympic | undefined
-  ): { name: number; value: number }[] {
+  ): { name: string; value: number }[] {
     if (!olympic) {
       return [];
     }

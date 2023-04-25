@@ -24,7 +24,7 @@
     <div class="text-center">
       <div class="d-inline-block mx-auto px-2 custom-background rounded">
         <ng-container *ngIf="nbMedalsPerCountry$ | async as nbMedalsPerCountry">
-          <app-pie-chart [dataList]="nbMedalsPerCountry"></app-pie-chart>
+          <app-pie-chart [data]="nbMedalsPerCountry"></app-pie-chart>
         </ng-container>
       </div>
     </div>

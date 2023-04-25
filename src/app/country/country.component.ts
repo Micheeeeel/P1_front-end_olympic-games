@@ -13,8 +13,9 @@ import { Olympic } from '../core/models/Olympic';
 export class CountryComponent implements OnInit {
   // @Input() olympic!: Olympic;
 
+  countryName: string = '';
   olympic$: Observable<Olympic | undefined> = of(undefined);
-  nbMedalsPerYear$: Observable<{ name: number; value: number }[]> = of([]);
+  nbMedalsPerYear$: Observable<{ name: string; value: number }[]> = of([]);
 
   constructor(
     private olympicService: OlympicService,
@@ -22,13 +23,17 @@ export class CountryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (this.olympic && this.olympic.country) {
-    //   this.nbMedalsPerYear$ = this.olympicService.getMedalsPerYear(
-    //     this.olympic.country
-    //   );
-    // }
+    this.countryName = this.activatedRoute.snapshot.params['countryName'];
+    this.olympic$ = this.olympicService.getOlympicByCountry(this.countryName);
 
-    const snappedCountry = this.activatedRoute.snapshot.params['countryName'];
-    this.olympic$ = this.olympicService.getOlympicByCountry(snappedCountry);
+    if (this.olympic$) {
+      this.nbMedalsPerYear$ = this.olympicService.getMedalsPerYear(
+        this.countryName
+      );
+    }
+
+    this.nbMedalsPerYear$.subscribe((MedalsPerYear) => {
+      console.log(MedalsPerYear);
+    });
   }
 }

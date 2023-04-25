@@ -2,7 +2,7 @@
   <tr>
     <td>
       <ngx-charts-pie-chart
-        [results]="dataList"
+        [results]="data"
         [view]="view"
         [gradient]="gradient"
         [legend]="legend"
@@ -11,6 +11,8 @@
         [tooltipDisabled]="tooltipDisabled"
         [labels]="labels"
         [doughnut]="doughnut"
+        [legend]="legend"
+        [legendPosition]="legendPosition"
         (select)="onSelect($event)"
       >
         <ng-template #tooltipTemplate let-model="model">
