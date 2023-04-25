@@ -16,6 +16,10 @@ export class CountryComponent implements OnInit {
   countryName: string = '';
   olympic$: Observable<Olympic | undefined> = of(undefined);
   nbMedalsPerYear$: Observable<{ name: string; value: number }[]> = of([]);
+  // nbEntries$: Observable<number> = of(0);
+  nbEntries: number | undefined = 0;
+  TotalNbMedals: number = 0;
+  TotalNbAthletes: number = 0;
 
   constructor(
     private olympicService: OlympicService,
@@ -32,8 +36,22 @@ export class CountryComponent implements OnInit {
       );
     }
 
-    this.nbMedalsPerYear$.subscribe((MedalsPerYear) => {
-      console.log(MedalsPerYear);
-    });
+    // this.nbMedalsPerYear$.subscribe((MedalsPerYear) => {
+    //   console.log(MedalsPerYear);
+    // });
+
+    // this.nbEntries$ = this.olympicService.getParticipationCount(
+    //   this.countryName
+    // );
+
+    this.olympicService
+      .getOlympicByCountry(this.countryName)
+      .subscribe((olympicValue) => {
+        this.nbEntries = olympicValue?.participations.length;
+        this.TotalNbMedals =
+          this.olympicService.getTotalMedalsForCountry(olympicValue);
+        this.TotalNbAthletes =
+          this.olympicService.getTotalAthletesForCountry(olympicValue);
+      });
   }
 }

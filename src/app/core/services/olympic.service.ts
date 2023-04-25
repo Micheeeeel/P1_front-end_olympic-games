@@ -34,7 +34,7 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
-  getOlympicByCountry(countryName: string) {
+  getOlympicByCountry(countryName: string): Observable<Olympic | undefined> {
     return this.olympics$.asObservable().pipe(
       map((olympics) => {
         return olympics?.find((o) => o.country === countryName);
@@ -100,10 +100,37 @@ export class OlympicService {
     });
   }
 
-  private getTotalMedalsForCountry(olympic: Olympic): number {
-    return olympic.participations.reduce(
-      (sum, participation) => sum + participation.medalsCount,
-      0
-    );
+  public getTotalMedalsForCountry(olympic: Olympic | undefined): number {
+    if (!olympic) {
+      return 0;
+    } else if (olympic.participations) {
+      return olympic.participations.reduce(
+        (sum, participation) => sum + participation.medalsCount,
+        0
+      );
+    } else return 0;
   }
+
+  public getTotalAthletesForCountry(olympic: Olympic | undefined): number {
+    if (!olympic) {
+      return 0;
+    } else if (olympic.participations) {
+      return olympic.participations.reduce(
+        (sum, participation) => sum + participation.athleteCount,
+        0
+      );
+    } else return 0;
+  }
+
+  // getParticipationCount(countryName: string): Observable<number> {
+  //   return this.getOlympicByCountry(countryName).pipe(
+  //     map((olympic) => {
+  //       if (olympic) {
+  //         return olympic.participations.length;
+  //       } else {
+  //         return 0;
+  //       }
+  //     })
+  //   );
+  // }
 }

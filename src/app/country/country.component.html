@@ -27,7 +27,7 @@
   <div class="row justify-content-center text-center py-2">
     <div class="col-12">
       <div class="myTitle d-inline-block mx-auto py-1 px-2 rounded">
-        <h2>Medals per Country</h2>
+        <h2>{{ countryName }}</h2>
       </div>
     </div>
   </div>
@@ -41,20 +41,20 @@
   <div class="row text-center py-2">
     <div class="col-4">
       <div class="mySubTitle d-inline-block mx-auto px-2 rounded">
-        <h6 class="text-secondary py-1">Number of JOs</h6>
-        <h4 class="text-dark">5</h4>
+        <h6 class="text-secondary py-1">Number of entries</h6>
+        <h4 class="text-dark">{{ nbEntries }}</h4>
       </div>
     </div>
     <div class="col-4">
       <div class="mySubTitle d-inline-block mx-auto px-2 rounded">
-        <h6 class="text-secondary py-1">Number of countries</h6>
-        <h4 class="text-dark">6</h4>
+        <h6 class="text-secondary py-1">Total number medals</h6>
+        <h4 class="text-dark">{{ TotalNbMedals }}</h4>
       </div>
     </div>
     <div class="col-4">
       <div class="mySubTitle d-inline-block mx-auto px-2 rounded">
-        <h6 class="text-secondary py-1">Number of countries</h6>
-        <h4 class="text-dark">3</h4>
+        <h6 class="text-secondary py-1">Total number of athletes</h6>
+        <h4 class="text-dark">{{ TotalNbAthletes }}</h4>
       </div>
     </div>
   </div>
