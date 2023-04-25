@@ -45,7 +45,7 @@ export class OlympicService {
 
   getMedalsPerYear(
     countryName: String
-  ): Observable<{ year: number; medalsCount: number }[]> {
+  ): Observable<{ name: number; value: number }[]> {
     return this.olympics$
       .asObservable()
       .pipe(
@@ -59,14 +59,14 @@ export class OlympicService {
 
   private mapOlympicsToMedalsPerYear(
     olympic: Olympic | undefined
-  ): { year: number; medalsCount: number }[] {
+  ): { name: number; value: number }[] {
     if (!olympic) {
       return [];
     }
 
     return olympic.participations.map((participation) => ({
-      year: participation.year,
-      medalsCount: participation.medalsCount,
+      name: participation.year,
+      value: participation.medalsCount,
     }));
   }
 

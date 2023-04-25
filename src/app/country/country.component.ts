@@ -11,9 +11,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 export class CountryComponent implements OnInit {
   @Input() olympic!: Olympic;
 
-  nbMedalsPerYear$: Observable<{ year: number; medalsCount: number }[]> = of(
-    []
-  );
+  nbMedalsPerYear$: Observable<{ name: number; value: number }[]> = of([]);
 
   constructor(private olympicService: OlympicService) {}
 

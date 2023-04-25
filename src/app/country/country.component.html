@@ -10,7 +10,7 @@
         {{ participation.athleteCount }}
       </li>
       <li *ngFor="let medalInfo of nbMedalsPerYear$ | async">
-        {{ medalInfo.year }}: {{ medalInfo.medalsCount }} médailles
+        {{ medalInfo.name }}: {{ medalInfo.value }} médailles
       </li>
     </ul>
   </div>
