@@ -1,10 +1,10 @@
 <div class="country">
-  <h2>{{ olympic.country }}</h2>
-  <p>ID: {{ olympic.id }}</p>
+  <h2>{{ (olympic$ | async)?.country }}</h2>
+  <p>ID: {{ (olympic$ | async)?.id }}</p>
   <div class="participations">
     <h3>Participations :</h3>
     <ul>
-      <li *ngFor="let participation of olympic.participations">
+      <li *ngFor="let participation of (olympic$ | async)?.participations">
         Année: {{ participation.year }}, Ville: {{ participation.city }},
         Médailles: {{ participation.medalsCount }}, Athlètes:
         {{ participation.athleteCount }}

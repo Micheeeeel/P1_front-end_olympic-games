@@ -34,6 +34,14 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
+  getOlympicByCountry(countryName: string) {
+    return this.olympics$.asObservable().pipe(
+      map((olympics) => {
+        return olympics?.find((o) => o.country === countryName);
+      })
+    );
+  }
+
   getListOfCountries() {
     return this.olympics$.asObservable().pipe(
       map((value) => {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LegendPosition, Color, ScaleType } from '@swimlane/ngx-charts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pie-chart',
@@ -35,12 +36,15 @@ export class PieChartComponent implements OnInit {
   doughnut: boolean = false;
   showLegend: boolean = false;
 
-  constructor() {
+  constructor(private router: Router) {
     Object.assign(this, { dataList: this.dataList });
   }
 
   onSelect(data: { name: string; value: number }): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+
+    // this.router.navigateByUrl('country/' + data.name);
+    this.router.navigateByUrl(`country/${data.name}`);
   }
 
   // onActivate(data): void {
