@@ -46,6 +46,10 @@
         [tooltipDisabled]="tooltipDisabled"
         [schemeType]="schemeType"
       >
+        <ng-template #tooltipTemplate let-model="model">
+          {{ model.name }} <br />
+          🏅 {{ model.value }}
+        </ng-template>
       </ngx-charts-bar-vertical>
     </td>
   </tr>
