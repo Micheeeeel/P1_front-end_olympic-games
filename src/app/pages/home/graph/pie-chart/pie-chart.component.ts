@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit {
-  @Input() dataList: { name: string; value: number }[] = [];
+  @Input() data: { name: string; value: number }[] = [];
 
   view: [number, number] = [500, 500];
   // colorScheme: Color = {
@@ -28,16 +28,15 @@ export class PieChartComponent implements OnInit {
   // };
   gradient: boolean = true;
   legend: boolean = false;
-  // legendPosition: LegendPosition = LegendPosition.Below;
+  legendPosition: LegendPosition = LegendPosition.Below;
   explodeSlices: boolean = false;
   arcWidth: number = 0.3;
   tooltipDisabled: boolean = false;
   labels: boolean = true;
   doughnut: boolean = false;
-  showLegend: boolean = false;
 
   constructor(private router: Router) {
-    Object.assign(this, { dataList: this.dataList });
+    Object.assign(this, { dataList: this.data });
   }
 
   onSelect(data: { name: string; value: number }): void {
@@ -46,14 +45,6 @@ export class PieChartComponent implements OnInit {
     // this.router.navigateByUrl('country/' + data.name);
     this.router.navigateByUrl(`country/${data.name}`);
   }
-
-  // onActivate(data): void {
-  //   console.log('Activate', JSON.parse(JSON.stringify(data)));
-  // }
-
-  // onDeactivate(data): void {
-  //   console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  // }
 
   ngOnInit(): void {}
 }
