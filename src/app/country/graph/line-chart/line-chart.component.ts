@@ -37,11 +37,9 @@ export class LineChartComponent implements OnInit {
   showXAxis = true;
   showYAxis = true;
   gradient = true;
-
   // colorScheme = {
   //   domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   // };
-
   tooltipDisabled: boolean = false;
 
   constructor(private router: Router) {
