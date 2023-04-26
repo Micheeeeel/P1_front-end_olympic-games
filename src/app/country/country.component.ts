@@ -14,7 +14,6 @@ export class CountryComponent implements OnInit {
   // @Input() olympic!: Olympic;
 
   countryName: string = '';
-  olympic$: Observable<Olympic | undefined> = of(undefined);
   nbMedalsPerYear$: Observable<{ name: string; value: number }[]> = of([]);
   // nbEntries$: Observable<number> = of(0);
   nbEntries: number | undefined = 0;
@@ -27,23 +26,15 @@ export class CountryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // get the country name from the route
     this.countryName = this.activatedRoute.snapshot.params['countryName'];
-    this.olympic$ = this.olympicService.getOlympicByCountry(this.countryName);
 
-    if (this.olympic$) {
-      this.nbMedalsPerYear$ = this.olympicService.getMedalsPerYear(
-        this.countryName
-      );
-    }
+    // get the medals per year for the country to feed the chart
+    this.nbMedalsPerYear$ = this.olympicService.getMedalsPerYear(
+      this.countryName
+    );
 
-    // this.nbMedalsPerYear$.subscribe((MedalsPerYear) => {
-    //   console.log(MedalsPerYear);
-    // });
-
-    // this.nbEntries$ = this.olympicService.getParticipationCount(
-    //   this.countryName
-    // );
-
+    // get various variables to show in the template for that country
     this.olympicService
       .getOlympicByCountry(this.countryName)
       .subscribe((olympicValue) => {

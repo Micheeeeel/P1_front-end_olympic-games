@@ -50,10 +50,6 @@ export class OlympicService {
     );
   }
 
-  getOlympics() {
-    return this.olympics$.asObservable();
-  }
-
   getOlympicByCountry(countryName: string): Observable<Olympic | undefined> {
     return this.olympics$.asObservable().pipe(
       map((olympics) => {
@@ -62,62 +58,33 @@ export class OlympicService {
     );
   }
 
-  getListOfCountries() {
-    return this.olympics$.asObservable().pipe(
-      map((value) => {
-        const countries = value?.map((olympic) => olympic.country);
-        return countries;
+  getMedalsPerYear(
+    countryName: String
+  ): Observable<{ name: string; value: number }[]> {
+    return this.olympics$.pipe(
+      map((olympics) => olympics.find((o) => o.country === countryName)),
+      map((olympic) => {
+        if (!olympic) {
+          return [];
+        }
+
+        return olympic.participations.map((participation) => ({
+          name: participation.year,
+          value: participation.medalsCount,
+        }));
       })
     );
   }
 
-  getMedalsPerYear(
-    countryName: String
-  ): Observable<{ name: string; value: number }[]> {
-    return this.olympics$
-      .asObservable()
-      .pipe(
-        map((olympics) =>
-          this.mapOlympicsToMedalsPerYear(
-            olympics?.find((o) => o.country === countryName)
-          )
-        )
-      );
-  }
-
-  private mapOlympicsToMedalsPerYear(
-    olympic: Olympic | undefined
-  ): { name: string; value: number }[] {
-    if (!olympic) {
-      return [];
-    }
-
-    return olympic.participations.map((participation) => ({
-      name: participation.year,
-      value: participation.medalsCount,
-    }));
-  }
-
   getTotalMedalsPerCountry(): Observable<{ name: string; value: number }[]> {
-    return this.olympics$
-      .asObservable()
-      .pipe(map((olympics) => this.mapOlympicsToTotalMedals(olympics)));
-  }
-
-  private mapOlympicsToTotalMedals(
-    olympics: Olympic[] | undefined
-  ): { name: string; value: number }[] {
-    if (!olympics) {
-      return [];
-    }
-
-    return olympics.map((olympic: Olympic) => {
-      const totalMedals = this.getTotalMedalsForCountry(olympic);
-      return {
-        name: olympic.country,
-        value: totalMedals,
-      };
-    });
+    return this.olympics$.pipe(
+      map((olympics) =>
+        olympics.map((olympic: Olympic) => ({
+          name: olympic.country,
+          value: this.getTotalMedalsForCountry(olympic),
+        }))
+      )
+    );
   }
 
   public getTotalMedalsForCountry(olympic: Olympic | undefined): number {

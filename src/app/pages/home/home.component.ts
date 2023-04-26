@@ -9,18 +9,12 @@ import { Olympic } from 'src/app/core/models/Olympic';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  olympics$: Observable<Olympic[]> = of([]);
-  listOfCountries$: Observable<string[]> = of([]);
   nbMedalsPerCountry$: Observable<{ name: string; value: number }[]> = of([]);
   nBJOs: number = 0;
 
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    this.olympics$ = this.olympicService.getOlympics();
-
-    this.listOfCountries$ = this.olympicService.getListOfCountries();
-
     this.nbMedalsPerCountry$ = this.olympicService.getTotalMedalsPerCountry();
 
     // pas terrible... On considère que le nombre de JOs participé est le même pour chaque pays.
