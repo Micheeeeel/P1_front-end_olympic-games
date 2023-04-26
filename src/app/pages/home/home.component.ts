@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     this.nbMedalsPerCountry$ = this.olympicService.getTotalMedalsPerCountry();
 
     // pas terrible... On considère que le nombre de JOs participé est le même pour chaque pays.
-    // A défaut, faut t'il considérer le nombre de JO, et donc d'année différente présente dans le fichier source ?
+    // A défaut, faut t'il considérer le nombre de JO, et donc d'année différentes présentes dans le fichier source ?
     this.olympicService
       .getMedalsPerYear('France')
       .subscribe((MedalsPerYear) => {

@@ -108,16 +108,4 @@ export class OlympicService {
       );
     } else return 0;
   }
-
-  // getParticipationCount(countryName: string): Observable<number> {
-  //   return this.getOlympicByCountry(countryName).pipe(
-  //     map((olympic) => {
-  //       if (olympic) {
-  //         return olympic.participations.length;
-  //       } else {
-  //         return 0;
-  //       }
-  //     })
-  //   );
-  // }
 }
