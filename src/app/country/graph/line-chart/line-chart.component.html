@@ -2,15 +2,14 @@
   <tr>
     <td>
       <ngx-charts-line-chart
-        [results]="data"
+        [results]="dataSeries"
         [view]="view"
         [gradient]="gradient"
-        [legend]="legend"
+        [legend]="false"
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
-        [legend]="legend"
         [animations]="animations"
         [timeline]="timeline"
         [animations]="animations"
@@ -19,45 +18,10 @@
         [tooltipDisabled]="tooltipDisabled"
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
+        [xAxis]="true" 
+        [yAxis]="true" 
       >
       </ngx-charts-line-chart>
     </td>
   </tr>
-  <!-- <tr>
-    <td>
-      <ngx-charts-bar-vertical
-        [results]="data"
-        [view]="view"
-        [gradient]="gradient"
-        [legend]="legend"
-        [legendPosition]="legendPosition"
-        [tooltipDisabled]="tooltipDisabled"
-        [view]="view"
-        [gradient]="gradient"
-        [legend]="legend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [legend]="legend"
-        [animations]="animations"
-        [animations]="animations"
-        [showGridLines]="showGridLines"
-        [tooltipDisabled]="tooltipDisabled"
-        [schemeType]="schemeType"
-      >
-        <ng-template #tooltipTemplate let-model="model">
-          {{ model.name }} <br />
-          🏅 {{ model.value }}
-        </ng-template>
-      </ngx-charts-bar-vertical>
-
-    </td>
-  </tr> -->
 </table>
-
-<div >
-  <ngx-charts-line-chart [results]="data" [legend]="false" [showXAxisLabel]="true" xAxisLabel="Dates" 
-      [xAxis]="true" [yAxis]="true" [animations]="false">
-  </ngx-charts-line-chart>
-</div>

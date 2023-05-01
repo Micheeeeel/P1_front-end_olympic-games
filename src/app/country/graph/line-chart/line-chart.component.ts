@@ -15,7 +15,7 @@ export class LineChartComponent implements OnInit {
   dataSeries: { name: string; series: { name: string; value: number }[] }[] =
     [];
 
-  view: [number, number] = [300, 300];
+  view: [number, number] = [500, 200];
 
   // options
   legend: boolean = true;
@@ -28,7 +28,7 @@ export class LineChartComponent implements OnInit {
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Dates';
   yAxisLabel: string = 'Medals';
-  timeline: boolean = true;
+  timeline: boolean = false;
   showGridLines: boolean = true;
   autoScale: boolean = false;
   showRefLines: boolean = true;
@@ -43,7 +43,7 @@ export class LineChartComponent implements OnInit {
   tooltipDisabled: boolean = false;
 
   constructor(private router: Router) {
-    Object.assign(this, { dataList: this.data });
+    // Object.assign(this, { dataList: this.dataSeries });
   }
 
   ngOnInit(): void {
@@ -54,13 +54,15 @@ export class LineChartComponent implements OnInit {
     };
 
     this.dataSeries.push(objectData);
+
+
   }
 
-  onClick(): void {
-    console.log(this.dataSeries[0].name);
-    this.dataSeries[0].series.forEach((item) => {
-      console.log('name:', item.name);
-      console.log('value:', item.value);
-    });
-  }
+  // onClick(): void {
+  //   console.log(this.dataSeries[0].name);
+  //   this.dataSeries[0].series.forEach((item) => {
+  //     console.log('name:', item.name);
+  //     console.log('value:', item.value);
+  //   });
+  // }
 }

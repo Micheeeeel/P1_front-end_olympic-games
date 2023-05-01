@@ -61,7 +61,7 @@
   <div class="row justify-content-center">
     <div class="text-center">
       <div class="d-inline-block mx-auto px-2 custom-background rounded">
-        <ng-container *ngIf="nbMedalsPerYear">
+        <ng-container *ngIf="nbMedalsPerYear.length > 0">
           <app-line-chart
             [countryName]="countryName"
             [data]="nbMedalsPerYear"
