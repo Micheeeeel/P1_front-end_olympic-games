@@ -1,8 +1,8 @@
 <table>
-  <!-- <tr>
+  <tr>
     <td>
       <ngx-charts-line-chart
-        [results]="dataSeries"
+        [results]="data"
         [view]="view"
         [gradient]="gradient"
         [legend]="legend"
@@ -22,8 +22,8 @@
       >
       </ngx-charts-line-chart>
     </td>
-  </tr> -->
-  <tr>
+  </tr>
+  <!-- <tr>
     <td>
       <ngx-charts-bar-vertical
         [results]="data"
@@ -51,6 +51,13 @@
           🏅 {{ model.value }}
         </ng-template>
       </ngx-charts-bar-vertical>
+
     </td>
-  </tr>
+  </tr> -->
 </table>
+
+<div >
+  <ngx-charts-line-chart [results]="data" [legend]="false" [showXAxisLabel]="true" xAxisLabel="Dates" 
+      [xAxis]="true" [yAxis]="true" [animations]="false">
+  </ngx-charts-line-chart>
+</div>

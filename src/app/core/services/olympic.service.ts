@@ -14,6 +14,15 @@ import { throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class OlympicService {
+  
+  // getOlympics(): Observable<Olympic[]> {
+  //   return this.loadInitialData();
+  // }
+
+  // getOlympics() {
+  //   return this.olympics$.asObservable();
+  // }
+
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Olympic[]>([]);
 
@@ -59,7 +68,7 @@ export class OlympicService {
   }
 
   getMedalsPerYear(
-    countryName: String
+    countryName: string
   ): Observable<{ name: string; value: number }[]> {
     return this.olympics$.pipe(
       map((olympics) => olympics.find((o) => o.country === countryName)),
@@ -75,6 +84,7 @@ export class OlympicService {
       })
     );
   }
+
 
   getTotalMedalsPerCountry(): Observable<{ name: string; value: number }[]> {
     return this.olympics$.pipe(

@@ -14,6 +14,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     //the subscribe() method is called on the Observable to initiate the subscription.
     //the take(1) operator ensures that the subscription only receives one value and then unsubscribes automatically.
-    this.olympicService.loadInitialData().pipe(take(1)).subscribe();
+    // this.olympicService.loadInitialData().pipe(take(1)).subscribe();
   }
 }
