@@ -2,6 +2,7 @@
   <tr>
     <td>
       <ngx-charts-line-chart
+        (window:resize)="onResize($event)"
         [results]="dataSeries"
         [view]="view"
         [gradient]="gradient"

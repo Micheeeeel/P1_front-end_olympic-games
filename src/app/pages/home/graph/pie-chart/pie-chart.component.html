@@ -2,6 +2,7 @@
   <tr>
     <td>
       <ngx-charts-pie-chart
+        (window:resize)="onResize($event)"
         [results]="data"
         [view]="view"
         [gradient]="gradient"

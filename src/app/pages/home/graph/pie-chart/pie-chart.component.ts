@@ -47,4 +47,8 @@ export class PieChartComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onResize(event: any) {
+    this.view = [event.target.innerWidth / 1.5, 300];
+  }
 }

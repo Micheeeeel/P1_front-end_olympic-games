@@ -15,7 +15,7 @@ export class LineChartComponent implements OnInit {
   dataSeries: { name: string; series: { name: string; value: number }[] }[] =
     [];
 
-  view: [number, number] = [600, 300];
+  view: [number, number] = [500, 300];
 
   // options
   legend: boolean = true;
@@ -72,6 +72,10 @@ export class LineChartComponent implements OnInit {
       date
     );
     return year;
+  }
+
+  onResize(event: any) {
+    this.view = [event.target.innerWidth / 1.5, 300];
   }
 
   // onClick(): void {
