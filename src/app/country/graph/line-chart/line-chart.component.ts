@@ -15,7 +15,7 @@ export class LineChartComponent implements OnInit {
   dataSeries: { name: string; series: { name: string; value: number }[] }[] =
     [];
 
-  view: [number, number] = [500, 200];
+  view: [number, number] = [600, 300];
 
   // options
   legend: boolean = true;
@@ -30,7 +30,7 @@ export class LineChartComponent implements OnInit {
   yAxisLabel: string = 'Medals';
   timeline: boolean = false;
   showGridLines: boolean = true;
-  autoScale: boolean = false;
+  autoScale: boolean = true;
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
   schemeType: ScaleType = ScaleType.Ordinal;
