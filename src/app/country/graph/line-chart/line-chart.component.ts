@@ -54,8 +54,24 @@ export class LineChartComponent implements OnInit {
     };
 
     this.dataSeries.push(objectData);
+  }
 
-
+  /**
+   * Formats a numeric date value into a year string using the Intl.DateTimeFormat API.
+   *
+   * @param val The numeric date value to format.
+   * @returns A string representing the year of the date value.
+   */
+  dateTickFormatting(val: number): string {
+    // Convert the numeric value to a timestamp
+    const timestamp = Date.parse(val.toString());
+    // Create a new Date object from the timestamp
+    const date = new Date(timestamp);
+    // Use the Intl.DateTimeFormat API to format the year from the date object
+    const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(
+      date
+    );
+    return year;
   }
 
   // onClick(): void {
