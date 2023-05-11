@@ -1,28 +1,3 @@
-<!-- <div class="country">
-  <h2>{{ (olympic$ | async)?.country }}</h2>
-  <p>ID: {{ (olympic$ | async)?.id }}</p>
-  <div class="participations">
-    <h3>Participations :</h3>
-    <ul>
-      <li *ngFor="let participation of (olympic$ | async)?.participations">
-        Année: {{ participation.year }}, Ville: {{ participation.city }},
-        Médailles: {{ participation.medalsCount }}, Athlètes:
-        {{ participation.athleteCount }}
-      </li>
-      <li *ngFor="let medalInfo of nbMedalsPerYear$ | async">
-        {{ medalInfo.name }}: {{ medalInfo.value }} médailles
-      </li>
-    </ul>
-  </div>
-</div> -->
-
-<!-- <ng-container *ngIf="nbMedalsPerYear$ | async as nbMedalsPerYear">
-  <app-line-chart
-    [countryName]="countryName"
-    [data]="nbMedalsPerYear"
-  ></app-line-chart>
-</ng-container> -->
-
 <div class="container">
   <div class="row justify-content-center text-center py-2">
     <div class="col-12">
@@ -61,11 +36,8 @@
   <div class="row justify-content-center">
     <div class="text-center">
       <div class="d-inline-block mx-auto px-2 custom-background rounded">
-        <ng-container *ngIf="nbMedalsPerYear.length > 0">
-          <app-line-chart
-            [countryName]="countryName"
-            [data]="nbMedalsPerYear"
-          ></app-line-chart>
+        <ng-container *ngIf="countryName">
+          <app-line-chart [countryName]="countryName"></app-line-chart>
         </ng-container>
       </div>
     </div>

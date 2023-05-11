@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import { ScaleType } from '@swimlane/ngx-charts';
+import { OlympicService } from 'src/app/core/services/olympic.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, OnDestroy {
   @Input() countryName!: string;
-  @Input() data: { name: string; value: number }[] = [];
-  dataSeries: { name: string; series: { name: string; value: number }[] }[] =
-    [];
-
-  view: [number, number] = [500, 300];
+  // @Input() data: { name: string; value: number }[] = [];
+  nbMedalsPerYear: { name: string; value: number }[] = [];
+  medalsPerYearSubscription!: Subscription;
 
   // options
+  dataSeries: { name: string; series: { name: string; value: number }[] }[] =
+    [];
+  view: [number, number] = [500, 300];
   legend: boolean = true;
   legendPosition: LegendPosition = LegendPosition.Below;
   showLabels: boolean = true;
@@ -37,20 +39,25 @@ export class LineChartComponent implements OnInit {
   showXAxis = true;
   showYAxis = true;
   gradient = true;
-  // colorScheme = {
-  //   domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
-  // };
   tooltipDisabled: boolean = false;
 
-  constructor(private router: Router) {
-    // Object.assign(this, { dataList: this.dataSeries });
-  }
+  constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
+    // get the medals per year for the country to feed the chart
+    this.medalsPerYearSubscription = this.olympicService
+      .getMedalsPerYear(this.countryName)
+      .subscribe((value) => {
+        console.log(this.countryName);
+        console.log(value); // Ajoutez cette ligne pour imprimer les données dans la console
+
+        this.nbMedalsPerYear = value;
+      });
+
     // create an array of objects of only one object:
     const objectData = {
       name: this.countryName,
-      series: this.data,
+      series: this.nbMedalsPerYear,
     };
 
     this.dataSeries.push(objectData);
@@ -78,11 +85,7 @@ export class LineChartComponent implements OnInit {
     this.view = [event.target.innerWidth / 1.5, 300];
   }
 
-  // onClick(): void {
-  //   console.log(this.dataSeries[0].name);
-  //   this.dataSeries[0].series.forEach((item) => {
-  //     console.log('name:', item.name);
-  //     console.log('value:', item.value);
-  //   });
-  // }
+  ngOnDestroy(): void {
+    this.medalsPerYearSubscription.unsubscribe();
+  }
 }

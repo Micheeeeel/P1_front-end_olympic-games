@@ -30,16 +30,3 @@
     </div>
   </div>
 </div>
-
-<!-- 
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
-<p>list of countries :{{ (listOfCountries$ | async)?.length }}</p>
-<app-country
-  *ngFor="let thisCountry of olympics$ | async"
-  [olympic]="thisCountry"
-></app-country>
-<ul>
-  <li *ngFor="let medalsperCountry of nbMedalsPerCountry$ | async">
-    {{ medalsperCountry.name }}: {{ medalsperCountry.value }} medals
-  </li>
-</ul> -->

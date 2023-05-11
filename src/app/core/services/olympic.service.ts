@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -7,14 +8,13 @@ import { Participation } from '../models/Participation';
 import { __values } from 'tslib';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { getLocaleId } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OlympicService {
-  
   // getOlympics(): Observable<Olympic[]> {
   //   return this.loadInitialData();
   // }
@@ -70,8 +70,7 @@ export class OlympicService {
   getMedalsPerYear(
     countryName: string
   ): Observable<{ name: string; value: number }[]> {
-    return this.olympics$.pipe(
-      map((olympics) => olympics.find((o) => o.country === countryName)),
+    return this.getOlympicByCountry(countryName).pipe(
       map((olympic) => {
         if (!olympic) {
           return [];
@@ -84,7 +83,6 @@ export class OlympicService {
       })
     );
   }
-
 
   getTotalMedalsPerCountry(): Observable<{ name: string; value: number }[]> {
     return this.olympics$.pipe(
