@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { ActivatedRoute } from '@angular/router';
 import { Olympic } from 'src/app/core/models/Olympic';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-country',
@@ -20,7 +21,8 @@ export class CountryComponent implements OnInit, OnDestroy {
 
   constructor(
     private olympicService: OlympicService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,11 @@ export class CountryComponent implements OnInit, OnDestroy {
               this.olympicService.getTotalAthletesForCountry(olympicValue);
           });
       });
+  }
+
+  /// Navigate to the not-found page if countryNotFound is true (event listener in the template)
+  onCountryNotFound() {
+    this.router.navigate(['/not-found']);
   }
 
   ngOnDestroy(): void {

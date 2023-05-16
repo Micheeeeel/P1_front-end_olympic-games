@@ -4,6 +4,7 @@ import { LegendPosition } from '@swimlane/ngx-charts';
 import { ScaleType } from '@swimlane/ngx-charts';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Subscription } from 'rxjs';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-line-chart',
@@ -12,6 +13,8 @@ import { Subscription } from 'rxjs';
 })
 export class LineChartComponent implements OnInit, OnDestroy {
   @Input() countryName!: string;
+  @Output() countryNotFound = new EventEmitter<boolean>();
+
   // @Input() data: { name: string; value: number }[] = [];
   nbMedalsPerYear: { name: string; value: number }[] = [];
   medalsPerYearSubscription!: Subscription;
@@ -51,7 +54,11 @@ export class LineChartComponent implements OnInit, OnDestroy {
         console.log(this.countryName);
         console.log(value); // Ajoutez cette ligne pour imprimer les données dans la console
 
-        this.nbMedalsPerYear = value;
+        if (value.length === 0) {
+          this.countryNotFound.emit(true); // emit an event to the parent component to navigate to the not-found page
+        } else {
+          this.nbMedalsPerYear = value;
+        }
       });
 
     // create an array of objects of only one object:

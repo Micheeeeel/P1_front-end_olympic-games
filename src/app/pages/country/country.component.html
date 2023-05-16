@@ -37,7 +37,10 @@
     <div class="text-center">
       <div class="d-inline-block mx-auto px-2 custom-background rounded">
         <ng-container *ngIf="countryName">
-          <app-line-chart [countryName]="countryName"></app-line-chart>
+          <app-line-chart
+            [countryName]="countryName"
+            (countryNotFound)="onCountryNotFound()"
+          ></app-line-chart>
         </ng-container>
       </div>
     </div>
